@@ -10,6 +10,11 @@ import butterknife.ButterKnife;
  * Created by Leo on 2016/9/4.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     protected abstract void initViews(Bundle savedIntanceState);
     protected abstract void initToolBar();
 }

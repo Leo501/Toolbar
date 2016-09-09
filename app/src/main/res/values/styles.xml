@@ -20,14 +20,13 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!--设置toolbar的menu位置在其之下-->
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" >
-        <item name="android:colorBackground">@color/blue_greg_400</item>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
     </style>
     <!--设置toolbar的menu位置在其之下，还要设置4dp.不知道有没有bug-->
     <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item>
-        <item name="android:dropDownVerticalOffset">4.0dip</item>
     </style>
+    <!--<item name="android:dropDownVerticalOffset">4.0dip</item>-->
 
 </resources>
