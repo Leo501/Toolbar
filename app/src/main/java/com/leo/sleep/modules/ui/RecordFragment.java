@@ -13,13 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.leo.sleep.R;
+import com.leo.sleep.base.BaseFrament;
 import com.leo.sleep.utils.PixelsUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RecordFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class RecordFragment extends BaseFrament implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
