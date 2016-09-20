@@ -1,9 +1,13 @@
 package com.leo.sleep.base;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.animation.DecelerateInterpolator;
 
 import com.leo.sleep.R;
 
@@ -33,6 +37,45 @@ public abstract class ToobarActivity extends BaseActivity {
             throw new IllegalStateException(
                     "The subclass of ToolbarActivity must contain a toolbar.");
         }
+//      “v -> onToolbarClick()”运用了java8的新特征Lambda 是一个空方法
+        toolbar.setOnClickListener(v -> onToolbarClick());
+        if (canBack()) {
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        if (Build.VERSION.SDK_INT>=21){
+            appBarLayout.setElevation(10.6f);
+        }
+    }
+
+    public boolean canBack() {
+        return false;
+    }
+
+    protected void setAppBarAlpha(float alpha) {
+        appBarLayout.setAlpha(alpha);
+    }
+
+    public Toolbar getToolbar(){
+        return toolbar;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==android.R.id.home){
+            onBackPressed();
+            return true;
+        }else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    protected void hiderShowToolbar(){
+        appBarLayout.animate()
+                .translationY(isHidden?0:-appBarLayout.getHeight())
+                .setInterpolator(new DecelerateInterpolator(2))
+                .start();
+        isHidden=!isHidden;
     }
 
     protected void beforeSetContent() {
@@ -41,7 +84,6 @@ public abstract class ToobarActivity extends BaseActivity {
 
     @Override
     protected void initViews(Bundle savedIntanceState) {
-
     }
 
     @Override
