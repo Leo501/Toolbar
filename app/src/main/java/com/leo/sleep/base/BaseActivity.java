@@ -36,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return this.compositeSubscription;
     }
 
+    //用于统一管理Observable对象，统一释放
     public void addSubscription(Subscription s){
         if (this.compositeSubscription==null){
             this.compositeSubscription=new CompositeSubscription();

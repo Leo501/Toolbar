@@ -6,6 +6,6 @@ import java.io.Serializable;
  * Created by Leo on 2016/9/20.
  */
 public class Province implements Serializable{
-    private String proName;
-    private int proSort;
+    public String proName;
+    public int proSort;
 }

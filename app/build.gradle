@@ -8,10 +8,11 @@ android {
 
     defaultConfig {
         applicationId "com.leo.sleep"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -34,6 +35,7 @@ dependencies {
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:cardview-v7:23.1.1'
 
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
@@ -45,5 +47,7 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
 
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+
 
 }
