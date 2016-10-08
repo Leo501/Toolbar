@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import com.leo.sleep.utils.SharedPreferenceUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -17,7 +18,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by Leo on 2016/9/4.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
     public SharedPreferenceUtil sharedPreferenceUtil=null;

@@ -14,9 +14,9 @@ import java.util.List;
  * Created by hugo on 2015/9/30 0030.
  * 封装数据库操作
  */
-public class WeatherDB {
+public class CityDB {
 
-    public WeatherDB() {
+    public CityDB() {
 
     }
 
@@ -44,9 +44,9 @@ public class WeatherDB {
         if (cursor.moveToFirst()) {
             do {
                 City city = new City();
-                city.CityName = cursor.getString(cursor.getColumnIndex("CityName"));
-                city.ProID = ProID;
-                city.CitySort = cursor.getInt(cursor.getColumnIndex("CitySort"));
+                city.cityName = cursor.getString(cursor.getColumnIndex("CityName"));
+                city.proID = ProID;
+                city.citySort = cursor.getInt(cursor.getColumnIndex("CitySort"));
                 list.add(city);
             } while (cursor.moveToNext());
         }
