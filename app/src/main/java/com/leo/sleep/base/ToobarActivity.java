@@ -12,6 +12,7 @@ import android.view.animation.DecelerateInterpolator;
 import com.leo.sleep.R;
 
 /**
+ * 适配所有 toolbar
  * Created by Leo on 2016/9/11.
  */
 public abstract class ToobarActivity extends BaseActivity {
@@ -38,7 +39,9 @@ public abstract class ToobarActivity extends BaseActivity {
                     "The subclass of ToolbarActivity must contain a toolbar.");
         }
 //      “v -> onToolbarClick()”运用了java8的新特征Lambda 是一个空方法
+
         toolbar.setOnClickListener(v -> onToolbarClick());
+        setSupportActionBar(toolbar);
         if (canBack()) {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
@@ -86,8 +89,4 @@ public abstract class ToobarActivity extends BaseActivity {
     protected void initViews(Bundle savedIntanceState) {
     }
 
-    @Override
-    protected void initToolBar() {
-        toolbar.setOnClickListener(v -> onToolbarClick());
-    }
 }

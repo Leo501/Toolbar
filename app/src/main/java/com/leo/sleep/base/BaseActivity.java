@@ -45,11 +45,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         this.compositeSubscription.add(s);
     }
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-    }
-
     /**
      * 设置状态栏颜色
      * 也就是所谓沉浸式状态栏
@@ -93,6 +88,5 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         activity.getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
         activity.recreate();
     }
-    protected abstract void initViews(Bundle savedIntanceState);
-    protected abstract void initToolBar();
+    protected abstract void initViews(Bundle savedInstanceState);
 }

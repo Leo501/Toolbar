@@ -1,9 +1,15 @@
 <resources>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue_greg_500</item>
+        <item name="colorPrimaryDark">@color/blue_greg_600</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#FF4081</item>
     </style>
 </resources>

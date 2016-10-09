@@ -27,38 +27,38 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener ,RecordFragment.OnFragmentInteractionListener{
 
     private static final String TAG = "MainActivity";
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;//左右切换Fragment,使页面滑动
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;//标签指示器与ViewPager组合使用
+
     @BindView(R.id.fab)
     FloatingActionButton fab;
+
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;//侧滑导航栏
+
     @BindView(R.id.drawer_layout)
-    DrawerLayout drawer;
-    @BindView(R.id.nav_view) NavigationView navigationView;
-    @BindView(R.id.viewPager)
-    ViewPager viewPager;
-    @BindView(R.id.tabLayout)
-    TabLayout tabLayout;
+    DrawerLayout drawer;//官方侧滑菜单
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initToolBar();
         initViews(savedInstanceState);
     }
 
     @Override
-    protected void initViews(Bundle savedIntanceState) {
-
+    protected void initViews(Bundle savedInstanceState) {
+        setSupportActionBar(toolbar);
+        initPagerAdapter();
         initFloatingActionButton();
         initActionBarDrawerToggle();
-        initPagerAdapter();
-    }
-
-    @Override
-    protected void initToolBar() {
-        setSupportActionBar(toolbar);
     }
 
     private void initPagerAdapter() {
