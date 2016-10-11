@@ -25,7 +25,6 @@ public abstract class ToobarActivity extends BaseActivity {
 
     protected AppBarLayout appBarLayout;
     protected Toolbar toolbar;
-    protected boolean isHidden=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,29 +33,16 @@ public abstract class ToobarActivity extends BaseActivity {
         setContentView(provideContentViewId());
         appBarLayout=(AppBarLayout) findViewById(R.id.appbar_layout);
         toolbar=(Toolbar) findViewById(R.id.toolbar);
-        if (toolbar==null||appBarLayout==null){
-            throw new IllegalStateException(
-                    "The subclass of ToolbarActivity must contain a toolbar.");
-        }
-//      “v -> onToolbarClick()”运用了java8的新特征Lambda 是一个空方法
-
         toolbar.setOnClickListener(v -> onToolbarClick());
         setSupportActionBar(toolbar);
         if (canBack()) {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        if (Build.VERSION.SDK_INT>=21){
-            appBarLayout.setElevation(10.6f);
-        }
     }
 
     public boolean canBack() {
         return false;
-    }
-
-    protected void setAppBarAlpha(float alpha) {
-        appBarLayout.setAlpha(alpha);
     }
 
     public Toolbar getToolbar(){
@@ -71,14 +57,6 @@ public abstract class ToobarActivity extends BaseActivity {
         }else {
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    protected void hiderShowToolbar(){
-        appBarLayout.animate()
-                .translationY(isHidden?0:-appBarLayout.getHeight())
-                .setInterpolator(new DecelerateInterpolator(2))
-                .start();
-        isHidden=!isHidden;
     }
 
     protected void beforeSetContent() {

@@ -1,5 +1,6 @@
 package com.leo.sleep.modules.ui;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,7 +19,9 @@ import android.view.View;
 
 import com.leo.sleep.R;
 import com.leo.sleep.base.BaseActivity;
+import com.leo.sleep.component.city.Constant;
 import com.leo.sleep.modules.adapter.HomePagerAdapter;
+import com.leo.sleep.utils.CircularAnimUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +79,11 @@ public class MainActivity extends BaseActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent intent=new Intent(MainActivity.this,ChoiceCityActivity.class);
+                intent.putExtra(Constant.MULTI_CHECK,true);
+                CircularAnimUtil.startActivity(MainActivity.this, intent, fab,
+                        R.color.blue_greg_500);
+
             }
         });
     }
