@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * 用于打开省市的数据库
  * Created by Leo on 2016/9/25.
  */
 public class DBManager {
@@ -54,32 +55,6 @@ public class DBManager {
 
     public void openDatabase(){
         this.database=this.openDatabase(DB_PATH+"/"+DB_NAME);
-    }
-
-    private SQLiteDatabase openDatabase1(String dbfile){
-        //判断数据库文件是否存在，若不存在则执行导入，否则直接打开数据库
-        try {
-        if (!(new File(dbfile).exists())){
-            InputStream inputStream=BaseApplication.getAppContext().getResources()
-                    .openRawResource(R.raw.china_city);
-                FileOutputStream fileOutputStream=new FileOutputStream(dbfile);
-                byte[] buffer=new byte[BUFFER_SIZE];
-                int count=0;
-                while ((count=inputStream.read(buffer))>0){
-                    fileOutputStream.write(buffer,0,count);
-                }
-                fileOutputStream.close();
-                inputStream.close();
-        }
-        return SQLiteDatabase.openOrCreateDatabase(dbfile,null);
-        } catch (FileNotFoundException e) {
-                LogUtil.e("File not found");
-                e.printStackTrace();
-            } catch (IOException e) {
-                LogUtil.e("IO exception");
-                e.printStackTrace();
-        }
-     return null;
     }
 
     private SQLiteDatabase openDatabase(String dbfile){

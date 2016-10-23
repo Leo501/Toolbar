@@ -5,13 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.leo.sleep.modules.serializable.City;
 import com.leo.sleep.modules.serializable.Province;
-import com.leo.sleep.utils.WeatherUtil;
+import com.leo.sleep.utils.SqCloseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hugo on 2015/9/30 0030.
+ *
  * 封装数据库操作
  */
 public class CityDB {
@@ -23,7 +23,7 @@ public class CityDB {
     public static List<Province> loadProvinces(SQLiteDatabase db) {
 
         List<Province> list = new ArrayList<>();
-
+        //向数据库中查找"T_Province"表的数据。
         Cursor cursor = db.query("T_Province", null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -34,7 +34,7 @@ public class CityDB {
                 list.add(province);
             } while (cursor.moveToNext());
         }
-        WeatherUtil.closeQuietly(cursor);
+        SqCloseUtil.closeQuietly(cursor);
         return list;
     }
 
@@ -50,7 +50,7 @@ public class CityDB {
                 list.add(city);
             } while (cursor.moveToNext());
         }
-        WeatherUtil.closeQuietly(cursor);
+        SqCloseUtil.closeQuietly(cursor);
         return list;
     }
 }

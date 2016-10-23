@@ -76,7 +76,7 @@ public class ChoiceCityActivity extends ToobarActivity {
         initView();
         Observable.defer(()->{
             DBManager.getInstance().openDatabase();
-            return Observable.just(LEVEL_PROVINCE);
+            return Observable.just(1);
         }).compose(RxUtils.rxSchedulerHelper())
                 //解决RxJava内存泄露问题
                 .compose(this.bindToLifecycle())
@@ -129,7 +129,7 @@ public class ChoiceCityActivity extends ToobarActivity {
     }
 
     private void initView() {
-        if (progressBar==null){
+        if (progressBar!=null){
             progressBar.setVisibility(View.VISIBLE);
         }
     }
@@ -150,15 +150,16 @@ public class ChoiceCityActivity extends ToobarActivity {
                 queryCities();
             }else if (currentLevel==LEVEL_CITY){
                 String city= Util.replaceCity(cityList.get(pos).cityName);
+                LogUtil.d(city);
                 if (isChecked){
                     //保存选择城市
                     OrmLite.getInstance().save(new CityORM(city));
 //                    RxBus.getDefault().post(new MultiUpdate());
-                    LogUtil.d("是多城市管理模式");
                 }else {
                     SharedPreferenceUtil.getInstance().setCityName(city);
 //                    RxBus.getDefault().post(new ChangeCityEvent());
                 }
+
                 finish();
             }
         }));

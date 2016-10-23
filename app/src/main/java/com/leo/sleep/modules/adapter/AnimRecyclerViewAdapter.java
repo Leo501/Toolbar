@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import com.leo.sleep.R;
 
 /**
+ * 基类
  * Created by Leo on 2016/9/22.
  */
 public class AnimRecyclerViewAdapter<T extends RecyclerView.ViewHolder>

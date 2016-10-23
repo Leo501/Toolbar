@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#273b71</color>
+    <color name="colorPrimaryDark">#273b71</color>
+    <color name="colorAccent">#273b71</color>
     <color name="blue_greg_400">#78909C</color>
     <color name="blue_greg_500">#607D8B</color>
     <color name="blue_greg_600">#546E7A</color>
     <color name="blue_greg_700">#455A64</color>
     <color name="white">#ffffff</color>
+    <color name="greg_bg">#BDBDBD</color>
+    <color name="red_light">#FF0033</color>
+    <color name="pink">#ff4081</color>
+    <color name="deep_blue_500">#273B7A</color>
+    <color name="deep_blue_800">#121149</color>
+    <color name="light_yellow_500">#FFC61B</color>
+    <color name="light_yellow_200">#FEE187</color>
+    <color name="deep_orange_500">#FF5419</color>
 </resources>

@@ -1,12 +1,12 @@
 package com.leo.sleep.modules.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -16,18 +16,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.leo.sleep.R;
 import com.leo.sleep.base.BaseActivity;
 import com.leo.sleep.component.city.Constant;
 import com.leo.sleep.modules.adapter.HomePagerAdapter;
 import com.leo.sleep.utils.CircularAnimUtil;
+import com.leo.sleep.utils.DoubleClickExit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,RecordFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
     @BindView(R.id.viewPager)
@@ -66,10 +68,11 @@ public class MainActivity extends BaseActivity
 
     private void initPagerAdapter() {
         HomePagerAdapter homePagerAdapter=new HomePagerAdapter(getSupportFragmentManager());
-        homePagerAdapter.addTab(new RecordFragment(),"睡觉");
+        homePagerAdapter.addTab(new SleepFragment(),"睡觉");
         homePagerAdapter.addTab(new RecordFragment(),"记录");
         viewPager.setAdapter(homePagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(pageListener);
     }
 
 
@@ -77,8 +80,6 @@ public class MainActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 Intent intent=new Intent(MainActivity.this,ChoiceCityActivity.class);
                 intent.putExtra(Constant.MULTI_CHECK,true);
                 CircularAnimUtil.startActivity(MainActivity.this, intent, fab,
@@ -92,7 +93,7 @@ public class MainActivity extends BaseActivity
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -103,7 +104,13 @@ public class MainActivity extends BaseActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (!DoubleClickExit.check()) {
+                Snackbar snackbar=DoubleClickExit.getSnackbar(fab,getString(R.string.double_exit));
+                DoubleClickExit.setSnackBarBg(getApplication(),R.color.blue_greg_500);
+                snackbar.show();
+            } else {
+                finish();
+            }
         }
     }
 
@@ -147,10 +154,26 @@ public class MainActivity extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    ViewPager.OnPageChangeListener pageListener=new ViewPager.OnPageChangeListener(){
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        Log.d(TAG, "onFragmentInteraction: communication with fragment");
-    }
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (position==1){
+                fab.hide();
+            }else {
+                fab.show();
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 }
 
