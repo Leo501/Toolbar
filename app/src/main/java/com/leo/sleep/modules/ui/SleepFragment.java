@@ -89,6 +89,13 @@ public class SleepFragment extends BaseFrament implements SwipeRefreshLayout.OnR
                         }).show();
             }
         });
+        adapter.setAlarmListener(new SleepAdapter.onAlarmClick() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view,"设置闹钟" , Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+            }
+        });
 
         recyclerView.setAdapter(adapter);
     }

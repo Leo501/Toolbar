@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leo.sleep.R;
+import com.leo.sleep.component.city.AlarmClock;
 import com.leo.sleep.component.city.WeatherData;
 import com.leo.sleep.modules.serializable.Weather;
 import com.leo.sleep.utils.ChangeColorUtil;
 import com.leo.sleep.utils.LogUtil;
 import com.leo.sleep.utils.Util;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,14 +32,16 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
     private Context context;
     private onLongClick longClick;
     private onItemClick itemClick;
+    private onAlarmClick alarmListener;
 
     private static final int TYPE_ONE=0;//天气
-    private static final int TYPE_TWO=1;//闹钟
-    private static final int TYPE_THREE=2;//添加闹钟的图标
+    private static final int TYPE_TWO=1;//添加闹钟的图标
+    private static final int TYPE_THREE=2;//闹钟
 
-    //type1的数据源
+    //type的数据源
     private Weather weather;
     private WeatherData weatherData;
+    private List<AlarmClock> alarmList;
 
     //通过构造函数来取得数据
     public SleepAdapter(Weather weather) {
@@ -47,6 +52,10 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
         this.weatherData = weatherData;
     }
 
+    public void setAlarmList(List<AlarmClock> alarmList) {
+        this.alarmList = alarmList;
+    }
+
     public void setLongClick(onLongClick click){
         this.longClick=click;
     }
@@ -55,20 +64,30 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
         this.itemClick = itemClick;
     }
 
-    //根据position不同的，来选择type.
+    public void setAlarmListener(onAlarmClick alarmListener) {
+        this.alarmListener = alarmListener;
+    }
+
+    /**
+     * 根据position不同的，来选择type.
+     * @param position 位置
+     * @return  返回类型
+     */
     @Override
     public int getItemViewType(int position) {
-        //
+        //得到闹钟个数0 or n (n>0)
+        int alarmNumb=alarmList!=null?alarmList.size():0;
+
         if (position==SleepAdapter.TYPE_ONE){
             return SleepAdapter.TYPE_ONE;
         }
-        if (position==SleepAdapter.TYPE_TWO){
+        //如果闹钟为0，position=1
+        // 为n时，position=size+1
+        if ((position-alarmNumb)==SleepAdapter.TYPE_THREE){
+            return SleepAdapter.TYPE_THREE;
+        }else {
             return SleepAdapter.TYPE_TWO;
         }
-        if (position==SleepAdapter.TYPE_THREE){
-            return SleepAdapter.TYPE_THREE;
-        }
-        return super.getItemViewType(position);
     }
 
     /**
@@ -85,11 +104,23 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
                return new WeatherViewHolder(
                        LayoutInflater.from(context).inflate(R.layout.item_temperature,parent,false));
             }
+            case TYPE_TWO:{
+                return new AlarmIconViewHolder(
+                        LayoutInflater.from(context).inflate(R.layout.item_add_alarm,parent,false));
+            }
+            case TYPE_THREE:{
+                return new AlarmTimerViewHolder(
+                        LayoutInflater.from(context).inflate(R.layout.item_alarm,parent,false));
+            }
         }
         return null;
     }
 
-    //设置每个item的数据。
+    /**
+     * 设置每个item的数据。
+     * @param holder  用于绷定数据
+     * @param position 根据位置的不同来设置不同的类型的holder
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int itemType=getItemViewType(position);
@@ -99,14 +130,24 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
                 holder.itemView.setOnClickListener(view->{itemClick.itemClick(""+itemType);});
                 holder.itemView.setOnLongClickListener(v -> {longClick.longClick(""+itemType);return true;});
             }
+            case TYPE_TWO:{
+                holder.itemView.setOnClickListener(v -> {alarmListener.onClick(v);});
+            }
+            case TYPE_THREE:{
+                ((AlarmTimerViewHolder)holder).bind(alarmList.get(position-1));
+                
+            }
         }
         super.onBindViewHolder(holder, position);
     }
 
-    //要显示的个数
+    /**
+     * @return 要显示的个数
+     */
     @Override
     public int getItemCount() {
-        return 1;
+        int size=alarmList!=null?alarmList.size():0;
+        return 2+size;
     }
 
     /**
@@ -136,6 +177,7 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
         }
         void bind(WeatherData data){
             try {
+//                ChangeColorUtil.setColor(context,weatherIcon,android.R.color.background_dark);
                 tempFlu.setText(String.format("%s℃",data.getTemp_now()));
                 tempMax.setText(
                         String.format("↑ %s ℃", data.getTemp_today_max()));
@@ -148,25 +190,42 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
                 LogUtil.e(TAG,e.toString());
             }
         }
-
-        /*void bind(Weather weather){
-            try {
-                tempFlu.setText(String.format("%s℃",weather.now.tmp));
-                tempMax.setText(
-                        String.format("↑ %s ℃", weather.dailyForecast.get(0).tmp.max));
-                tempMin.setText(
-                        String.format("↓ %s ℃", weather.dailyForecast.get(0).tmp.min));
-                dialog_city.setText(Util.safeText(weather.basic.city));
-            }catch (Exception e){
-                LogUtil.e(TAG,e.toString());
-            }
-        }*/
     }
+    class AlarmIconViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView alarmText;
+        public AlarmIconViewHolder(View itemView) {
+            super(itemView);
+            alarmText=(TextView) itemView.findViewById(R.id.add_alarm);
+        }
+    }
+    class AlarmTimerViewHolder extends RecyclerView.ViewHolder{
+
+        @BindView(R.id.item_alarm_timer)
+        TextView timer;
+        @BindView(R.id.item_alarm_day)
+        TextView day;
+        @BindView(R.id.item_alarm_rest_time)
+        TextView rest_time;
+        public AlarmTimerViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this,itemView);
+        }
+        void bind(AlarmClock data){
+            timer.setText(data.getTime());
+            day.setText(data.isAM()?"上午":"下午");
+            rest_time.setText(data.getRestTime());
+        }
+    }
+
     //设置点击事件
     public interface onItemClick{
         void itemClick(String type);
     }
     public interface onLongClick{
         void longClick(String time);
+    }
+    public interface onAlarmClick{
+        void onClick(View view);
     }
 }
