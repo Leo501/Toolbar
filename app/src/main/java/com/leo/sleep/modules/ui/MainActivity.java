@@ -24,6 +24,9 @@ import com.leo.sleep.component.city.Constant;
 import com.leo.sleep.modules.adapter.HomePagerAdapter;
 import com.leo.sleep.utils.CircularAnimUtil;
 import com.leo.sleep.utils.DoubleClickExit;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,7 +71,7 @@ public class MainActivity extends BaseActivity
 
     private void initPagerAdapter() {
         HomePagerAdapter homePagerAdapter=new HomePagerAdapter(getSupportFragmentManager());
-        homePagerAdapter.addTab(new SleepFragment(),"睡觉");
+        homePagerAdapter.addTab(new SleepFragment(MainActivity.this,getFragmentManager()),"睡觉");
         homePagerAdapter.addTab(new RecordFragment(),"记录");
         viewPager.setAdapter(homePagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

@@ -58,6 +58,12 @@ dependencies {
     compile 'com.trello:rxlifecycle-components:0.7.0'
 
     compile 'com.google.code.gson:gson:2.4'
+    //button
+    compile 'com.zcw:togglebutton-library:1.0.0'
+    //time picker
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+
+
 
 
 }
