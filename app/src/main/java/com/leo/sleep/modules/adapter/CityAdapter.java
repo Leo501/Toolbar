@@ -1,6 +1,9 @@
 package com.leo.sleep.modules.adapter;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,12 +31,15 @@ public class CityAdapter extends AnimRecyclerViewAdapter<CityAdapter.CityViewHol
 
     @Override
     public CityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CityViewHolder(LayoutInflater.from(context).inflate(R.layout.item_city,parent,false));
+        //查看系统版本号，选择不同的布局
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            return new CityViewHolder(LayoutInflater.from(context).inflate(R.layout.item_city_low_version,parent,false));
+        }
+            return new CityViewHolder(LayoutInflater.from(context).inflate(R.layout.item_city,parent,false));
     }
 
     @Override
     public void onBindViewHolder(CityViewHolder holder, int position) {
-//        super.onBindViewHolder(holder, position);
         holder.bind(dataList.get(position));
         holder.cardView.setOnClickListener(v->onItemClickListener.onItemClick(v,position));
     }
@@ -52,8 +58,8 @@ public class CityAdapter extends AnimRecyclerViewAdapter<CityAdapter.CityViewHol
     }
 
     class CityViewHolder extends RecyclerView.ViewHolder{
-        TextView itemCity;
 
+        TextView itemCity;
         CardView cardView;
         public CityViewHolder(View itemView) {
             super(itemView);

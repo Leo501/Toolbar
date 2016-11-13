@@ -1,4 +1,4 @@
-package com.leo.sleep.modules.db;
+package com.leo.sleep.component.manager;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

@@ -43,19 +43,19 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.jakewharton:butterknife:8.4.0'
 
-    // Rx
+    // Rxjava
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
-
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
-
+    //解决RxJava内存泄露的rxlifecycle
     compile 'com.trello:rxlifecycle:0.7.0'
     // If you want to bind to Android-specific lifecycles
     compile 'com.trello:rxlifecycle-android:0.7.0'
     // If you want pre-written Activities and Fragments you can subclass as providers
     compile 'com.trello:rxlifecycle-components:0.7.0'
+
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
 
     compile 'com.google.code.gson:gson:2.4'
     //button

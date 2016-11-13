@@ -1,7 +1,6 @@
 package com.leo.sleep.modules.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leo.sleep.R;
-import com.leo.sleep.component.city.AlarmClock;
 import com.leo.sleep.component.city.WeatherData;
-import com.leo.sleep.modules.serializable.Weather;
-import com.leo.sleep.utils.ChangeColorUtil;
+import com.leo.sleep.component.model.AlarmsModel;
 import com.leo.sleep.utils.LogUtil;
-import com.leo.sleep.utils.Util;
+import com.leo.sleep.utils.StringUtil;
 import com.zcw.togglebutton.ToggleButton;
 
 import java.util.List;
@@ -40,21 +37,16 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
     private static final int TYPE_THREE=2;//闹钟
 
     //type的数据源
-    private Weather weather;
     private WeatherData weatherData;
-    private List<AlarmClock> alarmList;
+    private List<AlarmsModel> alarmList;
     private int typeThreePos=0;
 
-    //通过构造函数来取得数据
-    public SleepAdapter(Weather weather) {
-        this.weather = weather;
+    public SleepAdapter(WeatherData weather, List<AlarmsModel> list) {
+        this.weatherData = weather;
+        this.alarmList = list;
     }
 
-    public SleepAdapter(WeatherData weatherData,List<AlarmClock> list) {
-        this.weatherData = weatherData;
-        this.alarmList=list;
-        typeThreePos=(alarmList!=null?alarmList.size():0)+1;
-    }
+
 
     public void setLongClick(onLongClick click){
         this.longClick=click;
@@ -75,7 +67,7 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
      */
     @Override
     public int getItemViewType(int position) {
-
+        typeThreePos=(alarmList!=null?alarmList.size():0)+1;
         if (position==SleepAdapter.TYPE_ONE){
             return SleepAdapter.TYPE_ONE;
         }else if (position==typeThreePos){
@@ -122,8 +114,8 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
         switch (itemType){
             case TYPE_ONE:{
                 ((WeatherViewHolder)holder).bind(weatherData);
-                holder.itemView.setOnClickListener(view->{itemClick.itemClick(""+itemType);});
-                holder.itemView.setOnLongClickListener(v -> {longClick.longClick(""+itemType);return true;});
+//                holder.itemView.setOnClickListener(view->{itemClick.itemClick(""+itemType);});
+//                holder.itemView.setOnLongClickListener(v -> {longClick.longClick(""+itemType);return true;});
                 break;
             }
             case TYPE_THREE:{
@@ -132,6 +124,8 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
             }
             case TYPE_TWO:{
                 ((AlarmTimerViewHolder)holder).bind(alarmList.get(position-1));
+                holder.itemView.setOnLongClickListener(v -> {longClick.longClick(alarmList.get(position-1));return true;});
+                holder.itemView.setOnClickListener(v -> {itemClick.itemClick(alarmList.get(position-1));});
                 break;
             }
             default:
@@ -182,7 +176,7 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
                         String.format("↑ %s ℃", data.getTemp_today_max()));
                 tempMin.setText(
                         String.format("↓ %s ℃", data.getTemp_today_min()));
-                dialog_city.setText(Util.safeText(data.getCity()));
+                dialog_city.setText(StringUtil.safeText(data.getCity()));
                 temp_tomorrow_max.setText(String.format(" ~ %s℃",data.getTemp_today_max()));
                 temp_tomorrow_min.setText(String.format("%s℃",data.getTemp_today_min()));
             }catch (Exception e){
@@ -221,19 +215,25 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
-        void bind(AlarmClock data){
+        void bind(AlarmsModel data){
             try{
-                timer.setText(data.getTimer());
+                timer.setText(data.getTime());
                 day.setText(data.isAM()?"上午":"下午");
                 rest_time.setText("未开启");
                 //设置开关按键
-                button.setToggleOff();
+                if (data.isOpen()){
+                    button.setToggleOn();
+                    rest_time.setText(data.getRestTime());
+                }else {
+                    button.setToggleOff();
+                    rest_time.setText("未开启");
+                }
                 button.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
                     @Override
                     public void onToggle(boolean on) {
                         data.setOpen(on);
                         if (data.isOpen()){
-                            rest_time.setText(data.getTestTimer());
+                            rest_time.setText(data.getRestTime());
                         }else {
                             rest_time.setText("未开启");
                         }
@@ -247,11 +247,11 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
 
     //设置Temperature的item点击事件
     public interface onItemClick{
-        void itemClick(String type);
+        void itemClick(AlarmsModel alarm);
     }
     //设置Temperature的item长按事件
     public interface onLongClick{
-        void longClick(String time);
+        void longClick(AlarmsModel alarm);
     }
     //设置Alarm的点击事件。
     public interface onAddAlarmClick{

@@ -6,17 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.leo.sleep.R;
 import com.leo.sleep.base.BaseActivity;
@@ -24,9 +21,7 @@ import com.leo.sleep.component.city.Constant;
 import com.leo.sleep.modules.adapter.HomePagerAdapter;
 import com.leo.sleep.utils.CircularAnimUtil;
 import com.leo.sleep.utils.DoubleClickExit;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
-import java.util.Calendar;
+import com.leo.sleep.utils.SnackbarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -108,8 +103,8 @@ public class MainActivity extends BaseActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (!DoubleClickExit.check()) {
-                Snackbar snackbar=DoubleClickExit.getSnackbar(fab,getString(R.string.double_exit));
-                DoubleClickExit.setSnackBarBg(getApplication(),R.color.blue_greg_500);
+                Snackbar snackbar= SnackbarUtil.INSTANCE.getSnackbar(fab,getString(R.string.double_exit));
+                SnackbarUtil.INSTANCE.setSnackBarBg(getApplication(),snackbar,R.color.blue_greg_500);
                 snackbar.show();
             } else {
                 finish();
@@ -178,5 +173,6 @@ public class MainActivity extends BaseActivity
 
         }
     };
+
 }
 

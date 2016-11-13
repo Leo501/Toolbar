@@ -46,7 +46,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchorGravity="end|bottom"
         android:src="@mipmap/item_sleeping"
-        app:layout_behavior="com.leo.sleep.modules.listener.FloatingActionButtonScrollBehavior"
+        app:layout_behavior="com.leo.sleep.modules.behavior.FloatingActionButtonScrollBehavior"
         />
 
 </android.support.design.widget.CoordinatorLayout>

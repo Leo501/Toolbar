@@ -5,7 +5,7 @@ import android.text.TextUtils;
 /**
  * Created by Leo on 2016/9/29.
  */
-public class Util {
+public class StringUtil {
 
     /**
      * 安全的 String 返回

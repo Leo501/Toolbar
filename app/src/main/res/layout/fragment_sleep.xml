@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
- <!--   <include
-        layout="@layout/item_temperature"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />-->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiprefresh"
         android:layout_width="wrap_content"
@@ -19,12 +14,12 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/cardview_margin_left_or_right"/>
         <include
             layout="@layout/progressbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="150dp"/>
+            android:layout_height="match_parent" />
 
 
     </android.support.v4.widget.SwipeRefreshLayout>

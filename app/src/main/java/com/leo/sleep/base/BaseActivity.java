@@ -88,5 +88,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         activity.getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
         activity.recreate();
     }
+    //用于子类中实现
     protected abstract void initViews(Bundle savedInstanceState);
 }

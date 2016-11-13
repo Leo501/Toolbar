@@ -1,4 +1,4 @@
-package com.leo.sleep.modules.listener;
+package com.leo.sleep.modules.behavior;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -6,8 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
-
-import java.util.jar.Attributes;
 
 /**
  * Created by Leo on 2016/9/9.

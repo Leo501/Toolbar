@@ -11,6 +11,7 @@ import java.util.StringJoiner;
 
 public class AlarmClock {
 
+    private int id;
     private boolean isOpen=false;
     private boolean isAM;//是否上午
     private int hours;
@@ -23,6 +24,10 @@ public class AlarmClock {
         this.isAM = isAM;
         this.hours = hours;
         this.minutes = minutes;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setOpen(boolean open) {
@@ -41,13 +46,6 @@ public class AlarmClock {
         this.minutes = minutes;
     }
 
-    public void setRestHours(int restHours) {
-        this.restHours = restHours;
-    }
-
-    public void setRestMinutes(int restMinutes) {
-        this.restMinutes = restMinutes;
-    }
 
     public boolean isOpen() {
         return isOpen;
@@ -75,7 +73,7 @@ public class AlarmClock {
         Calendar c = Calendar.getInstance();
         int nowHours=c.get(Calendar.HOUR_OF_DAY);
         int nowMinutes=c.get(Calendar.MINUTE);
-        int add=(59-nowMinutes+minutes)/60;
+        int add=(60-nowMinutes+minutes)/60;
         restHours=(hours-nowHours+23+add)%24;
         return restHours;
     }
@@ -83,7 +81,7 @@ public class AlarmClock {
     public int getRestMinutes() {
         Calendar c = Calendar.getInstance();
         int nowMinutes=c.get(Calendar.MINUTE);
-        restMinutes=(59-nowMinutes+minutes)%60;
+        restMinutes=(60-nowMinutes+minutes)%60;
         return restMinutes;
     }
 

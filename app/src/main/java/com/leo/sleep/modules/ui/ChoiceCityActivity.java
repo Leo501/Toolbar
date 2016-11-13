@@ -17,20 +17,19 @@ import com.leo.sleep.component.city.OrmLite;
 import com.leo.sleep.component.city.SimpleSubscriber;
 import com.leo.sleep.component.table.CityORM;
 import com.leo.sleep.modules.adapter.CityAdapter;
-import com.leo.sleep.modules.db.DBManager;
-import com.leo.sleep.modules.db.CityDB;
+import com.leo.sleep.component.manager.DBManager;
+import com.leo.sleep.component.manager.CityDB;
 import com.leo.sleep.modules.serializable.City;
 import com.leo.sleep.modules.serializable.Province;
 import com.leo.sleep.utils.LogUtil;
 import com.leo.sleep.utils.RxUtils;
 import com.leo.sleep.utils.SharedPreferenceUtil;
 import com.leo.sleep.utils.SimpleSubscriberUtil;
-import com.leo.sleep.utils.Util;
+import com.leo.sleep.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator;
 import rx.Observable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -149,7 +148,7 @@ public class ChoiceCityActivity extends ToobarActivity {
                 recyclerView.smoothScrollToPosition(0);
                 queryCities();
             }else if (currentLevel==LEVEL_CITY){
-                String city= Util.replaceCity(cityList.get(pos).cityName);
+                String city= StringUtil.replaceCity(cityList.get(pos).cityName);
                 LogUtil.d(city);
                 if (isChecked){
                     //保存选择城市

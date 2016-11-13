@@ -8,7 +8,7 @@
     <dimen name="fab_margin">26dp</dimen>
     <dimen name="fab_size">100dp</dimen>
     <dimen name="fab_text_size">25sp</dimen>
-    <dimen name="cardview_margin">9dp</dimen>
+    <dimen name="cardview_margin">8dp</dimen>
     <dimen name="cardview_margin_left_or_right">7dp</dimen>
     <dimen name="item_add_linearLayout">17dp</dimen>
     <dimen name="item_alarm_linearLayout">14dp</dimen>
@@ -18,4 +18,5 @@
     <dimen name="item_add_text_time">22dp</dimen>
     <dimen name="item_add_image_small">18dp</dimen>
     <dimen name="item_temperature_location">23dp</dimen>
+    <dimen name="app_bar_height">256dp</dimen>
 </resources>

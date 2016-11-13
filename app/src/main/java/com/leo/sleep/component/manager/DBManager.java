@@ -1,4 +1,4 @@
-package com.leo.sleep.modules.db;
+package com.leo.sleep.component.manager;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,16 +29,17 @@ public class DBManager {
     private SQLiteDatabase database;
     private Context context;
 
+    //运行本类的时候会先执行下面这段
     private static DBManager dbInstance=new DBManager();
-
-    public DBManager(Context context){
-        this.context=context;
-    }
 
     public DBManager(){
         if (null==dbInstance){
             dbInstance=new DBManager(BaseApplication.getAppContext());
         }
+    }
+
+    public DBManager(Context context){
+        this.context=context;
     }
 
     public static DBManager getInstance(){
