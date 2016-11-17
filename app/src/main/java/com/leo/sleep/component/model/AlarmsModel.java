@@ -109,10 +109,32 @@ public class AlarmsModel extends ModelBase{
         return (hours-nowHours+23+add)%24;
     }
 
+    public String getRestHoursStr(){
+        int time=this.getRestHours();
+        if (time/10==0){
+            return "0"+time;
+        }else if (time==0){
+            return "00";
+        }else {
+            return ""+time;
+        }
+    }
+
     public int getRestMinutes() {
         Calendar c = Calendar.getInstance();
         int nowMinutes=c.get(Calendar.MINUTE);
         return (60-nowMinutes+minutes)%60;
+    }
+
+    public String getRestMinutesStr(){
+        int time=this.getRestMinutes();
+        if (time/10==0&&time!=0){
+            return "0"+time;
+        }else if (time==0){
+            return "00";
+        }else {
+            return ""+time;
+        }
     }
 
     public String getTime(){
@@ -120,6 +142,6 @@ public class AlarmsModel extends ModelBase{
     }
 
     public String getRestTime(){
-        return String.format("还有%d小时%d分钟",this.getRestHours(),this.getRestMinutes());
+        return String.format("还有%s小时%s分钟",this.getRestHoursStr(),this.getRestMinutesStr());
     }
 }

@@ -2,10 +2,11 @@ package com.leo.sleep.modules.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -21,7 +22,7 @@ import com.leo.sleep.component.city.Constant;
 import com.leo.sleep.modules.adapter.HomePagerAdapter;
 import com.leo.sleep.utils.CircularAnimUtil;
 import com.leo.sleep.utils.DoubleClickExit;
-import com.leo.sleep.utils.SnackbarUtil;
+import com.leo.sleep.utils.SnackbarUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +31,9 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
+    @BindView(R.id.coord)
+    CoordinatorLayout coordinatorLayout;
+
     @BindView(R.id.viewPager)
     ViewPager viewPager;//左右切换Fragment,使页面滑动
 
@@ -103,9 +107,9 @@ public class MainActivity extends BaseActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (!DoubleClickExit.check()) {
-                Snackbar snackbar= SnackbarUtil.INSTANCE.getSnackbar(fab,getString(R.string.double_exit));
-                SnackbarUtil.INSTANCE.setSnackBarBg(getApplication(),snackbar,R.color.blue_greg_500);
-                snackbar.show();
+                SnackbarUtils.showShortSnackbar(coordinatorLayout,"再按一次退出",
+                        ContextCompat.getColor(getApplication(),R.color.white),
+                        ContextCompat.getColor(getApplication(),R.color.red_light));
             } else {
                 finish();
             }
@@ -147,11 +151,11 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     ViewPager.OnPageChangeListener pageListener=new ViewPager.OnPageChangeListener(){
 
         @Override
@@ -159,6 +163,7 @@ public class MainActivity extends BaseActivity
 
         }
 
+        //换页设置是否显示
         @Override
         public void onPageSelected(int position) {
             if (position==1){

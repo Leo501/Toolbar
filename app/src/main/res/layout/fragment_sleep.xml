@@ -10,6 +10,7 @@
         android:id="@+id/swiprefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
         >
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
@@ -21,7 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="测试"/>
 
 </RelativeLayout>
