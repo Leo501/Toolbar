@@ -43,8 +43,8 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;//标签指示器与ViewPager组合使用
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+//    @BindView(R.id.fab)
+//    FloatingActionButton fab;
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;//侧滑导航栏
@@ -74,12 +74,12 @@ public class MainActivity extends BaseActivity
         homePagerAdapter.addTab(new RecordFragment(),"记录");
         viewPager.setAdapter(homePagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.addOnPageChangeListener(pageListener);
+//        viewPager.addOnPageChangeListener(pageListener);
     }
 
 
     protected void initFloatingActionButton(){
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,ChoiceCityActivity.class);
@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity
                         R.color.blue_greg_500);
 
             }
-        });
+        });*/
     }
 
     protected void initActionBarDrawerToggle(){
@@ -139,7 +139,8 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Intent intent=new Intent(MainActivity.this,AboutActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -156,7 +157,7 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    ViewPager.OnPageChangeListener pageListener=new ViewPager.OnPageChangeListener(){
+    /*ViewPager.OnPageChangeListener pageListener=new ViewPager.OnPageChangeListener(){
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -177,7 +178,7 @@ public class MainActivity extends BaseActivity
         public void onPageScrollStateChanged(int state) {
 
         }
-    };
+    };*/
 
 }
 
