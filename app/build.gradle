@@ -47,6 +47,10 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
+
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+
     //解决RxJava内存泄露的rxlifecycle
     compile 'com.trello:rxlifecycle:0.7.0'
     // If you want to bind to Android-specific lifecycles
@@ -61,9 +65,4 @@ dependencies {
     //button
     compile 'com.zcw:togglebutton-library:1.0.0'
     //time picker
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
-
-
-
-
-}
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'}

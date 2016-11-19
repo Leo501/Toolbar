@@ -102,4 +102,8 @@
         <string name="double_exit">再按一次退出</string>
         <string name="fab_text">▶</string>
         <string name="not_find_version_name">找不到版本号</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

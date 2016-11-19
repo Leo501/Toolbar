@@ -142,7 +142,8 @@ public class MainActivity extends BaseActivity
             Intent intent=new Intent(MainActivity.this,AboutActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-
+            Intent intent=new Intent(MainActivity.this,LaucherActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

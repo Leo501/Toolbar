@@ -16,4 +16,6 @@
     <color name="light_yellow_500">#FFC61B</color>
     <color name="light_yellow_200">#FEE187</color>
     <color name="deep_orange_500">#FF5419</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
