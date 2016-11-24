@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.leo.sleep.R;
 import com.leo.sleep.component.city.WeatherData;
+import com.leo.sleep.component.manager.DataBaseOrm;
 import com.leo.sleep.component.model.AlarmsModel;
 import com.leo.sleep.utils.LogUtil;
 import com.leo.sleep.utils.StringUtil;
@@ -232,6 +233,8 @@ public class SleepAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolde
                     @Override
                     public void onToggle(boolean on) {
                         data.setOpen(on);
+                        //更新闹钟
+                        DataBaseOrm.INSTANCE.upDate(data);
                         if (data.isOpen()){
                             rest_time.setText(data.getRestTime());
                         }else {

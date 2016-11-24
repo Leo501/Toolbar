@@ -105,7 +105,7 @@ public class AlarmsModel extends ModelBase{
         Calendar c = Calendar.getInstance();
         int nowHours=c.get(Calendar.HOUR_OF_DAY);
         int nowMinutes=c.get(Calendar.MINUTE);
-        int add=(60-nowMinutes+minutes)/60;
+        int add=(59-nowMinutes+minutes)/60;
         return (hours-nowHours+23+add)%24;
     }
 
@@ -123,7 +123,7 @@ public class AlarmsModel extends ModelBase{
     public int getRestMinutes() {
         Calendar c = Calendar.getInstance();
         int nowMinutes=c.get(Calendar.MINUTE);
-        return (60-nowMinutes+minutes)%60;
+        return (59-nowMinutes+minutes)%60;
     }
 
     public String getRestMinutesStr(){

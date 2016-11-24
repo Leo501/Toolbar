@@ -65,4 +65,8 @@ dependencies {
     //button
     compile 'com.zcw:togglebutton-library:1.0.0'
     //time picker
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'}
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    //launcher TextView Animation
+    compile 'hanks.xyz:htextview-library:0.1.5'
+
+}

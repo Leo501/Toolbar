@@ -128,6 +128,7 @@ public class SleepFragment extends BaseFrament implements SwipeRefreshLayout.OnR
                 isDeleteItem(alarm.getId());
             }
         });
+        //
         adapter.setAlarmListener(new SleepAdapter.onAddAlarmClick() {
             @Override
             public void onClick(View view) {
@@ -140,9 +141,11 @@ public class SleepFragment extends BaseFrament implements SwipeRefreshLayout.OnR
 
             }
         });
+        //添加修改时间的onClick
         adapter.setItemClick(new SleepAdapter.onItemClick() {
             @Override
             public void itemClick(AlarmsModel alarm) {
+                //通过alarm来取得id
                 AlarmsModel alarmOld=DataBaseOrm.INSTANCE.queryById(alarm.getId(),AlarmsModel.class);
                 TimePickerDialog timePickerDialog=TimePickerDialog.newInstance(
                         new TimePickerDialog.OnTimeSetListener() {
@@ -213,7 +216,7 @@ public class SleepFragment extends BaseFrament implements SwipeRefreshLayout.OnR
         }).show();
     }
 
-    //用于刷新时间的
+    //用于刷新时间的广播
     private BroadcastReceiver timeRefreshReceiver=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

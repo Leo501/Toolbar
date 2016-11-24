@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#273b71</color>
-    <color name="colorPrimaryDark">#273b71</color>
+    <color name="colorPrimary">#001f31</color>
+    <color name="colorPrimaryDark">#001f31</color>
     <color name="colorAccent">#273b71</color>
     <color name="blue_greg_400">#78909C</color>
     <color name="blue_greg_500">#607D8B</color>
@@ -18,4 +18,8 @@
     <color name="deep_orange_500">#FF5419</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="lineColor">#60d3d3d3</color>
+    <color name="defaultTextColor">#6f6f6f</color>
+    <color name="cloudyText">#728288</color>
 </resources>

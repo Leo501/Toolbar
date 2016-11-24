@@ -21,18 +21,17 @@
         >
 
         <ImageView
-            android:id="@+id/item_add_icon"
-            android:layout_width="@dimen/item_add_image"
-            android:layout_height="@dimen/item_add_image"
-
-            android:background="@mipmap/item_add"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_add"/>
         <TextView
             android:id="@+id/add_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/item_add_text_size"
-            android:layout_marginLeft="5dp"
+            android:textSize="15sp"
             android:text="添加闹钟"
+            android:gravity="center"
             />
     </LinearLayout>
 </android.support.v7.widget.CardView>

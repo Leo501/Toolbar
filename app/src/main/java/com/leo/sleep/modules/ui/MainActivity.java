@@ -145,9 +145,11 @@ public class MainActivity extends BaseActivity
             Intent intent=new Intent(MainActivity.this,LaucherActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
-
+            Intent intent=new Intent(MainActivity.this,ChoiceCityActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
-
+            Intent intent=new Intent(MainActivity.this,FullscreenActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
