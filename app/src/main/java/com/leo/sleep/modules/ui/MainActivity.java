@@ -23,9 +23,15 @@ import com.leo.sleep.modules.adapter.HomePagerAdapter;
 import com.leo.sleep.utils.CircularAnimUtil;
 import com.leo.sleep.utils.DoubleClickExit;
 import com.leo.sleep.utils.SnackbarUtils;
+import com.leo.sleep.utils.TransitionAnimUtils;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -146,7 +152,19 @@ public class MainActivity extends BaseActivity
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
             Intent intent=new Intent(MainActivity.this,ChoiceCityActivity.class);
-            startActivity(intent);
+            TransitionAnimUtils.INSTANCE.delayTransition(MainActivity.this,MainActivity.this
+            ,300,intent);
+            /*Observable.timer(300, TimeUnit.MILLISECONDS)
+                    .compose(bindToLifecycle())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<Long>() {
+                        @Override
+                        public void call(Long aLong) {
+                            startActivity(intent);
+                        }
+                    });*/
+
+
         } else if (id == R.id.nav_manage) {
             Intent intent=new Intent(MainActivity.this,FullscreenActivity.class);
             startActivity(intent);

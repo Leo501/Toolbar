@@ -63,6 +63,7 @@ public class LaucherActivity extends RxAppCompatActivity {
                                 ,new Intent(LaucherActivity.this,MainActivity.class)
                                 ,R.anim.activity_enter_anim,R.anim.activity_exit_anim
                         );
+                        finish();
                         /*ActivityOptionsCompat options= ActivityOptionsCompat.makeCustomAnimation(
                                 LaucherActivity.this,R.anim.activity_enter_anim,R.anim.activity_exit_anim);
                         Intent intent=new Intent(LaucherActivity.this,MainActivity.class);
@@ -100,7 +101,6 @@ public class LaucherActivity extends RxAppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHidePartRunnable);
         mHideHandler.postDelayed(mHidePartRunnable, delayMillis);
-
     }
 
     /*public final Runnable hTextViewRunnable=new Runnable() {

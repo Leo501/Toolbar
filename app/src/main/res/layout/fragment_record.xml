@@ -8,6 +8,10 @@
         android:id="@+id/swiprefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <!--<com.leo.sleep.custom.GradientImageView
+            android:id="@+id/gradient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/recyclerview"

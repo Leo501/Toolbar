@@ -22,6 +22,7 @@ public class CityAdapter extends AnimRecyclerViewAdapter<CityAdapter.CityViewHol
 
     private Context context;
     private ArrayList<String> dataList;
+    private boolean justOne=true;
     private OnRecyclerViewItemClickListener onItemClickListener=null;
 
     public CityAdapter(Context context, ArrayList<String> dataList) {
@@ -42,6 +43,12 @@ public class CityAdapter extends AnimRecyclerViewAdapter<CityAdapter.CityViewHol
     public void onBindViewHolder(CityViewHolder holder, int position) {
         holder.bind(dataList.get(position));
         holder.cardView.setOnClickListener(v->onItemClickListener.onItemClick(v,position));
+
+       /* //设置动画
+        if (justOne){
+            justOne=false;
+            showItemAnim(holder.itemView, position);
+        }*/
     }
 
     @Override
