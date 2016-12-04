@@ -7,8 +7,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.leo.sleep.R;
+import com.leo.sleep.utils.FontManagerUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -33,7 +38,7 @@ public class FullscreenActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    private View mContentView;
+    private TextView mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -93,20 +98,13 @@ public class FullscreenActivity extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        mContentView = (TextView)findViewById(R.id.fullscreen_content);
+        SimpleDateFormat format=new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        String aa=format.format(date);
+        mContentView.setText(aa);
+//        mContentView.setTypeface(FontManagerUtils.getInstance(getAssets()).getFont("fonts/Mirza-Regular.ttf"));
 
-
-        // Set up the user interaction to manually show or hide the system UI.
-//        mContentView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                toggle();
-//            }
-//        });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
