@@ -102,7 +102,7 @@ public class FullscreenActivity extends AppCompatActivity {
         SimpleDateFormat format=new SimpleDateFormat("HH:mm");
         Date date = new Date();
         String aa=format.format(date);
-        mContentView.setText(aa);
+        mContentView.setText(String.format("%d:%d",12,11));
 //        mContentView.setTypeface(FontManagerUtils.getInstance(getAssets()).getFont("fonts/Mirza-Regular.ttf"));
 
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);

@@ -14,5 +14,11 @@
         <attr name="middleColor" format="color"/>
         <attr name="endColor" format="color"/>
     </declare-styleable>
+    
+    <declare-styleable name="CircleButton">
+        <attr name="radius" format="dimension"/>
+        <attr name="inner_color" format="color"/>
+        <attr name="outer_color" format="color"/>
+    </declare-styleable>
 
 </resources>
